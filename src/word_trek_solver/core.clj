@@ -7,13 +7,22 @@
 ;;; Declarations
 
 (declare trie load-dictionary-trie
-         prefix-matches dfs
+         prefix? dfs
          perfect-square?
          dfs-pred)
 
 ;;; API
 
 (defn solve
+  "Given a string of 'letters', and optionally a collection of desired
+  'word-sizes', output a collection of words that can be formed by
+  assembling the letters into a matrix.
+
+  The length of 'letters' must be a perfect square (i.e. the number of rows must
+  be equal to the number of columns.
+
+  'word-sizes' is a collection of integers representing the acceptable word
+  lengths in the solution."
   ([letters] (solve letters (range (count letters))))
   ([letters word-sizes]
    (let [trie (load-dictionary-trie)
@@ -74,6 +83,10 @@
   (boolean (@dictionary w)))
 
 (defn- dfs
+  "Run a depth-first search against the provided 'grid', preventing any nodes
+  fail a check against 'pred' from being added to the queue. We are using a more
+  imperative approach here in order to avoid as many intermediary
+  representations as possible."
   ([grid] (dfs (constantly true) grid))
   ([pred grid]
    (let [queue (volatile! [])
