@@ -1,14 +1,15 @@
 # word-trek-solver
 
-A Clojure library designed to ... well, that part is up to you.
+A fast solver for games in the Boggle family, e.g. WordBrain, Work
+Trek Trek, etc. Given a puzzle to solve, this library will compute all
+possible words that can be spelled (i.e. it can provide word hints).
 
 ## Usage
 
-FIXME
+
 
 ## License
 
-Copyright © 2017 FIXME
+Copyright © 2017 Tom Goldsmith
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License 1.0
