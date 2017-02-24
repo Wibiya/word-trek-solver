@@ -61,7 +61,7 @@
 (defn- trie
   [lst]
   (let [index (clucy/memory-index)]
-    (apply clucy/add index  (mapv (fn [word] {:v word}) lst))
+    (apply clucy/add index (mapv (fn [word] {:v word}) lst))
     index))
 
 (defn- prefix?
