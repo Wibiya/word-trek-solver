@@ -10,7 +10,10 @@ possible words that can be spelled (i.e. it can provide word hints).
 
 ## Usage
 
-
+```clojure
+word-trek-solver.core> (solve "ezmrnubeslospaon" [3 6 7])
+=> ("embolus" "loo" "saloon" "saloons" "sub" "ens" "pal" "plumbs" "nos" "lap" "alb" "sum" "sob" "sap" "sol" "lob" "reb" "bus" "eon" "rem" "zen" "emu" "usa" "looser" "plumes" "lbs" "number" "spa" "boa" "mer" "alp" "sal" "sun" "unloose" "nub" "boo" "nooser" "bon" "pas" "bum" "salons" "sue" "plumber" "asp" "son" "slumber" "lumber" "bun" "nob")
+```
 
 ## License
 
