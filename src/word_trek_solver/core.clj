@@ -83,17 +83,17 @@
   (boolean (@dictionary w)))
 
 (defn- dfs
-  "Run a depth-first search against the provided 'grid', preventing any nodes
+  "Run a depth-first search against the provided 'matrix', preventing any nodes
   fail a check against 'pred' from being added to the queue. We are using a more
   imperative approach here in order to avoid as many intermediary
   representations as possible."
-  ([grid] (dfs (constantly true) grid))
-  ([pred grid]
+  ([matrix] (dfs (constantly true) matrix))
+  ([pred matrix]
    (let [queue (volatile! [])
          words (volatile! #{})
-         rows (count grid)
-         cols (count (first grid))
-         get-letter (fn [i j] (get-in grid [j i]))]
+         rows (count matrix)
+         cols (count (first matrix))
+         get-letter (fn [i j] (get-in matrix [j i]))]
 
      ;; seed the queue
      (dotimes [i cols]
