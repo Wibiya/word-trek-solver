@@ -117,9 +117,9 @@
                           (not (path-set [i2 j2])))
                  (let [s2 (str s (get-letter i2 j2))
                        node [i2 j2 s2 (conj path-set [i2 j2])]]
+                   (when (word? s2)
+                     (vswap! words conj s2))
                    (when (pred node)
-                     (when (word? s2)
-                       (vswap! words conj s2))
                      (vswap! queue conj node)))))))
          (recur)))
 
