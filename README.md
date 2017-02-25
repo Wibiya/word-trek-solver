@@ -11,7 +11,8 @@ possible words that can be spelled (i.e. it can provide word hints).
 ## Usage
 
 ```clojure
-;; solve for all words in the provided matrix that are of length 3, 6 or 7.
+;; solve for all words in the provided 4x4 matrix that are of length
+;; 3, 6 or 7.
 word-trek-solver.core> (solve "ezmrnubeslospaon" [3 6 7])
 => ("embolus" "loo" "saloon" "saloons" "sub" "ens" "pal" "plumbs"
 "nos" "lap" "alb" "sum" "sob" "sap" "sol" "lob" "reb" "bus" "eon"
