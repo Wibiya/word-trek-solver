@@ -19,7 +19,7 @@
   assembling the letters into a matrix.
 
   The length of 'letters' must be a perfect square (i.e. the number of rows must
-  be equal to the number of columns.
+  be equal to the number of columns.)
 
   'word-sizes' is a collection of integers representing the acceptable word
   lengths in the solution."
@@ -84,13 +84,14 @@
 
 (defn- dfs
   "Run a depth-first search against the provided 'matrix', preventing any nodes
-  fail a check against 'pred' from being added to the queue. We are using a more
-  imperative approach here in order to avoid as many intermediary
-  representations as possible."
+  that fail a check against 'pred' from being added to the queue. We are using a
+  more imperative approach here in order to avoid as many intermediary
+  representations as possible. A volatile for the queue, and a transient for the
+  words has been used."
   ([matrix] (dfs (constantly true) matrix))
   ([pred matrix]
    (let [queue (volatile! [])
-         words (volatile! #{})
+         words (transient #{})
          rows (count matrix)
          cols (count (first matrix))
          get-letter (fn [i j] (get-in matrix [j i]))]
@@ -109,18 +110,35 @@
        (when-let [queue* (not-empty @queue)]
          (let [[i j s path-set] (first queue*)]
            (vswap! queue next)
-           (doseq [[di dj] [[1 0] [1 -1] [0 -1] [-1 -1] [-1 0] [-1 1] [0 1] [1 1]]]
+
+           ;; for every node adjacent to the current node, inspect the word it
+           ;; constructs, and then add it to the queue provided it is
+           ;; 1) on the matrix, 2) is a word and 3) passes the 'pred' function
+           ;; running against it.
+           (doseq [[di dj] [[1 0] [1 -1] [0 -1] [-1 -1]
+                            [-1 0] [-1 1] [0 1] [1 1]]]
              (let [i2 (+ i di)
                    j2 (+ j dj)]
+
+               ;; verify the node is on the matrix, and has not yet been seen by
+               ;; the path this node has followed.
                (when (and (>= i2 0) (< i2 cols)
                           (>= j2 0) (< j2 cols)
                           (not (path-set [i2 j2])))
                  (let [s2 (str s (get-letter i2 j2))
                        node [i2 j2 s2 (conj path-set [i2 j2])]]
+
+                   ;; when a word is found, add it to the list (a set ensures no
+                   ;; duplicate words are added)
                    (when (word? s2)
-                     (vswap! words conj s2))
+                     (conj! words s2))
+
+                   ;; when the node passes the 'pred' function test, add it to
+                   ;; the queue to be inspected later.
                    (when (pred node)
                      (vswap! queue conj node)))))))
          (recur)))
 
-     @words)))
+     ;; return a persistent data structure (i.e. the immutable data structure we
+     ;; are used to in Clojure) of the words discovered.
+     (persistent! words))))
