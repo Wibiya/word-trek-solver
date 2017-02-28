@@ -1,4 +1,4 @@
-(defproject word-trek-solver "0.1.0"
+(defproject tomthought/word-trek-solver "0.1.0"
   :description "A fast solver for games in the Boggle family, e.g. WordBrain, Work
 Trek Trek, etc. Given a puzzle to solve, this library will compute all
 possible words that can be spelled (i.e. it can provide word hints)."
