@@ -5,7 +5,7 @@
 [![Dependencies Status](https://jarkeeper.com/tomthought/word-trek-solver/status.svg)](https://jarkeeper.com/tomthought/word-trek-solver)
 
 A fast solver for games in the Boggle family, e.g. WordBrain, Work
-Trek Trek, etc. Given a puzzle to solve, this library will compute all
+Trek, etc. Given a puzzle to solve, this library will compute all
 possible words that can be spelled (i.e. it can provide word hints).
 
 ## Usage
